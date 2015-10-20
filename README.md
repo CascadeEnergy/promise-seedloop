@@ -58,7 +58,6 @@ function getPageOfItems(params) {
       // When there is no LastEvaluatedKey in the response, we've reached
       // the end of the results and should terminate the loop.
       if (!data.LastEvaluatedKey) {
-        delete params.ExclusiveStartKey;
         done = true;
       }
       
