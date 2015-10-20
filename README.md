@@ -48,12 +48,15 @@ function getPageOfItems(params) {
   return dynamoDb
     .scanPromised(params)
     .then((data) => {
-      // here is where you might do something with data.Items (the page of data)
-      // this thing you do, might even be asynchronous, just return a promise which
+      // here is where you might do something with data.Items (the page of data).
+      // Whatever you do might even be asynchronous, just return a promise which
       // eventually resolves to a "wrapper" object like below.
+        
       let done = false;
       params.ExclusiveStartKey = data.LastEvaluatedKey;
       
+      // When there is no LastEvaluatedKey in the response, we've reached
+      // the end of the results and should terminate the loop.
       if (!data.LastEvaluatedKey) {
         delete params.ExclusiveStartKey;
         done = true;
@@ -70,6 +73,6 @@ const initialParams = {TableName: 'my-dynamo-table'};
 
 loop(initialParams, getPageOfItems)
   .then(() => {
-    console.log('done, processed all pages');
+    console.log('done, went through all pages of data');
   });
 ```
