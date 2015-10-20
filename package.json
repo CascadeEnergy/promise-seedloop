@@ -1,7 +1,7 @@
 {
   "name": "promise-seedloop",
   "version": "0.0.0",
-  "description": "Helper for doing chained loops of asynchronous tasks with promises.",
+  "description": "Helper function for doing chained loops of asynchronous tasks with promises.",
   "repository": "CascadeEnergy/promise-seedloop",
   "author": {
     "name": "Will Vaughn",

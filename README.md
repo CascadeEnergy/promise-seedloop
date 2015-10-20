@@ -1,6 +1,6 @@
 # promise-seedloop [![Build Status](https://travis-ci.org/CascadeEnergy/promise-seedloop.svg?branch=master)](https://travis-ci.org/CascadeEnergy/promise-seedloop)
 
-> Helper for doing chained loops of asynchronous tasks with promises.
+> Helper function for doing chained loops of asynchronous tasks with promises.
 
 
 ## Install
@@ -11,7 +11,14 @@ $ npm install --save promise-seedloop
 
 ## Usage
 
-Most simple count to ten example.
+**seedLoop(seed, taskFn) => Promise**
+
+The `taskFn` must return a "wrapper" object whose keys are:
+
+- `wrapper.seed` will be passed to the next invocation of the taskFn.
+- `wrapper.done` can be used to stop the loop when `wrapper.done == true`.
+
+Here's the most simple count to ten example.
 
 ```javascript
 import loop from 'promise-seedloop';
@@ -28,8 +35,8 @@ loop(1, countToTen).then((result) => {
 });
 ```
 
-Pagination requests. This example uses dynamodb as an example because it's a particularly
-foolish database for paginating.
+Here's a more complex example doing pagination requests. This example uses dynamodb as an example because it's a
+particularly foolish database for pagination where seedloop can come in handy.
 
 ```javascript
 import dynamoDbPromised from 'aws-promised/dynamoDb';
